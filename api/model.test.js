@@ -24,4 +24,20 @@ describe('model', () => {
       expect(data).toHaveLength(2);
     });
   });
+  describe('getById', () => {
+    test('returns the recipe by the given id', async () => {
+      const bread = await Recipe.getById(1);
+      expect(bread).toMatchObject({
+        recipe_id: 1,
+        recipe_name: 'Artisan Bread',
+      });
+    });
+  });
+  describe('insert', () => {
+    test('returns the inserted row', async () => {
+      const input = { recipe_name: 'chili' };
+      const chili = await Recipe.insert(input);
+      expect(chili).toContain({ recipe_id: 3, recipe_name: 'chili' });
+    });
+  });
 });
