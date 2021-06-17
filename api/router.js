@@ -1,11 +1,16 @@
 const express = require('express');
-const helpers = require('./model');
+const Recipes = require('./model');
 
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  console.log('hey');
-  next();
+  Recipes.getAll()
+    .then((recipes) => {
+      res.json(recipes);
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
